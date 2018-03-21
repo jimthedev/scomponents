@@ -1,2 +1,0 @@
-# scomponents
-Created with CodeSandbox
