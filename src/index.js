@@ -1,20 +1,24 @@
 import React from "react";
 import { render } from "react-dom";
-import SyntaxHighlighter from 'react-syntax-highlighter';
-import preStyle from 'react-syntax-highlighter/styles/hljs/docco';
+import SyntaxHighlighter, { registerLanguage } from "react-syntax-highlighter/prism-light";
+import jsx from 'react-syntax-highlighter/languages/prism/jsx';
+import 'react-syntax-highlighter/styles/prism/prism';
+import { coy as preStyle } from 'react-syntax-highlighter/styles/prism';
+//import preStyle from 'react-syntax-highlighter/styles/hljs/docco';
 import { Alert } from "./Alert";
 import { H2, H3 } from "./Headings";
 const styles = {
   example: { marginTop: '40px' },
   pre: { backgroundColor: '#dedede', padding: '40px', textAlign: 'left', color: '#222', fontSize: '13px', marginBottom: '60px', fontWeight: '500' }
 };
-
+registerLanguage('jsx', jsx);
 const Pre = ({children, ...props}) => (
   <div style={{ marginBottom: '60px', fontSize: '14px' }}>
     <SyntaxHighlighter
       style={preStyle}
-      customStyle={{ background: '#e9e9e9'}}
+      customStyle={{ padding: '10px', borderRadius: '3px', border: '1px solid #d2d4d5'}}
       wrapLines={true}
+      language="jsx"
     >
       {children}
     </SyntaxHighlighter>
