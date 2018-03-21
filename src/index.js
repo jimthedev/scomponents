@@ -1,15 +1,28 @@
 import React from "react";
 import { render } from "react-dom";
-import Hello from "./Hello";
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import preStyle from 'react-syntax-highlighter/styles/hljs/docco';
 import { Alert } from "./Alert";
 import { H2, H3 } from "./Headings";
 const styles = {
-  main: { },
-  pre: { backgroundColor: '#dedede', padding: '20px', textAlign: 'left', color: '#222', fontSize: '13px', marginBottom: '40px', fontWeight: '500' }
+  example: { marginTop: '40px' },
+  pre: { backgroundColor: '#dedede', padding: '40px', textAlign: 'left', color: '#222', fontSize: '13px', marginBottom: '60px', fontWeight: '500' }
 };
 
 const Pre = ({children, ...props}) => (
-  <pre style={styles.pre} {...props}>{children}</pre>
+  <div style={{ marginBottom: '60px', fontSize: '14px' }}>
+    <SyntaxHighlighter
+      style={preStyle}
+      customStyle={{ background: '#e9e9e9'}}
+      wrapLines={true}
+    >
+      {children}
+    </SyntaxHighlighter>
+  </div>
+);
+
+const Example = ({ children, ...props }) => (
+  <div style={styles.example} {...props}>{children}</div>
 );
 
 class App extends React.Component {
@@ -22,8 +35,10 @@ class App extends React.Component {
       <div style={styles.main}>
         <H2>Alerts</H2>
         <H3>Basic</H3>
-        <Alert type="tip" message="Tip!" />
-        <Pre>{`<Alert type="tip" message="Tip!" />`}</Pre>
+        <Example>
+          <Alert type="tip" message="Tip!" />
+          <Pre>{`<Alert type="tip" message="Tip!" />`}</Pre>
+        </Example>
         <Alert type="success" message="Success!" />
         <Pre>{`<Alert type="success" message="Success!" />`}</Pre>
         <Alert type="error" message="Error!"  />
@@ -32,7 +47,7 @@ class App extends React.Component {
         <Pre>{`<Alert type="warning" message="Warning!" />`}</Pre>
         <Alert type="info" message="Info!" />
         <Pre>{`<Alert type="info" message="Info!" />`}</Pre>
-        <H3>Using render props</H3>
+        <H3>Complex: using render props</H3>
         <Alert type="tip" message={({ AlertMessage }) => (
           <AlertMessage type="tip" style={{ fontWeight: 'bold', color: 'purple', paddingLeft: '10px' }}>
             I am a customized alert message, while the surrounding alert box is kept the same but ultimately the text for this alert is also very long, excessively long.  It is as though someone did this on purpose.
