@@ -1,12 +1,13 @@
 import { cogstyle } from "cogstyle";
-import { alert } from './alert';
-import { heading } from './heading';
+import { alert } from "./alert";
+import { box, caption, heading } from "./headings";
 
 const cogs = cogstyle({
   from: {
     keys: {
       alignItems: "align-items",
       color: "color",
+      cursor: "cursor",
       backgroundColor: "background-color",
       borderColor: "border-color",
       borderWidth: "border-width",
@@ -20,6 +21,8 @@ const cogs = cogstyle({
       lineHeight: "line-height",
       textAlign: "text-align",
       verticalAlign: "vertical-align",
+      margin: "margin",
+      marginTop: "margin-top",
       marginBottom: "margin-bottom",
       paddingBottom: "padding-bottom",
       paddingTop: "padding-top",
@@ -59,42 +62,47 @@ const cogs = cogstyle({
         transparent: "transparent"
       },
       alignItems: {
-        start: 'start',
-        center: 'center'
+        start: "start",
+        center: "center"
       },
       display: {
-        flex: 'flex'
+        flex: "flex"
       },
       borderStyle: {
-        solid: 'solid'
+        solid: "solid"
       },
       boxSizing: {
-        borderBox: 'border-box'
+        borderBox: "border-box"
+      },
+      cursor: {
+        auto: "auto",
+        pointer: "pointer"
       },
       px: {
         // Probably need to fold these into
         // some more specific selectors
-        one: '1px',
-        three: '3px',
-        eight: '8px',
-        fourteen: '14px',
-        fifteen: '15px',
-        twenty: '20px'
+        one: "1px",
+        three: "3px",
+        eight: "8px",
+        fourteen: "14px",
+        fifteen: "15px",
+        twenty: "20px"
       },
       fontWeight: {
         bold: 600
       },
       fontFamily: {
-        sourceSansPro: '"Source Sans Pro", -apple-system, system-ui, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif'
+        sourceSansPro:
+          '"Source Sans Pro", -apple-system, system-ui, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif'
       },
       direction: {
-        left: 'left'
+        left: "left"
       },
       verticalAlign: {
         sub: "sub"
       },
       webkitFontSmoothing: {
-        antialiased: 'antialiased'
+        antialiased: "antialiased"
       }
       // alignItems: "center",
 
@@ -121,11 +129,15 @@ const cogs = cogstyle({
       // borderTopWidth: "1px",
 
       // display: "flex",
-  
+
       // justifyContent: "flex-start",
     },
     alert,
-    heading
+    headings: {
+      box,
+      caption,
+      heading
+    }
   }
 });
 export default cogs;

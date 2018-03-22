@@ -13,7 +13,8 @@ export const UnstyledAlertBox = ({
   children,
   render = children,
   onAlertBoxClick: rawOnAlertBoxClick,
-  captureOnClick = true
+  captureOnClick = true,
+  ...props
 }) => {
   // This allows for either RENDER PROP or FUNCTION AS CHILD
   // to be used.
@@ -42,7 +43,7 @@ export const UnstyledAlertBox = ({
   //console.log(rawOnAlertBoxClick());
   if (typeof render === "function") {
     return (
-      <div onClick={onAlertBoxClick} className={className} role="alert">
+      <div onClick={onAlertBoxClick} className={className} role="alert" {...props}>
         {render()}
       </div>
     );
@@ -50,7 +51,7 @@ export const UnstyledAlertBox = ({
 
   // This allows for PROPS ONLY.
   return (
-    <div onClick={onAlertBoxClick} className={className} role="alert">
+    <div onClick={onAlertBoxClick} className={className} role="alert" {...props}>
       {children}
     </div>
   );
@@ -77,6 +78,7 @@ export class UnstyledAlert extends React.Component {
             {children}
           </Fragment>
         )}
+        {...this.props}
       />
     );
   }
@@ -90,7 +92,7 @@ export class AlertMessage extends React.Component {
     if (typeof render === "function") {
       return render();
     }
-    return <div className={cog('alert.message', {type})} style={{ width: "100%" }} {...this.props}>{this.props.children}</div>;
+    return <div className={cog('alert.message', {type})} {...this.props}>{this.props.children}</div>;
   }
 }
 
@@ -98,13 +100,15 @@ export class Alert extends React.Component {
   render () {
     // For composed It is useful to add context
     const {
-      message: rawAlertMessage,
+      children,
+      message: rawAlertMessage = children,
       type: alertType,
       size: alertSize = "normal",
       direction: alertDirection = "ltr",
       onClick: onAlertBoxClick,
       captureOnClick = true
     } = this.props;
+    console.log('component props', !!onAlertBoxClick);
     // Accept either a string or function
     const alertMessage =
       typeof rawAlertMessage === "function"
@@ -117,7 +121,8 @@ export class Alert extends React.Component {
             <UnstyledAlertBox
               captureOnClick={captureOnClick}
               onAlertBoxClick={onAlertBoxClick}
-              className={cog("alert.box", { type: this.props.type })}
+              className={cog("alert.box", { type: this.props.type, clickable: !!onAlertBoxClick })}
+              {...this.props}
             >
               {alertDirection === "rtl" &&
                 alertMessage({ AlertMessage, alertDirection })}

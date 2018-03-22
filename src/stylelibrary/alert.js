@@ -62,6 +62,7 @@ export const alert = {
     }
   },
   box: ({ keys: k, values: v, props: p }) => {
+    console.log(p);
     const defaults = [
       [k.boxSizing, v.boxSizing.borderBox],
       [k.borderWidth, v.px.one],
@@ -74,7 +75,8 @@ export const alert = {
       [k.paddingBottom, v.px.eight],
       [k.paddingLeft, v.px.fifteen],
       [k.paddingRight, v.px.fifteen],
-      [k.paddingTop, v.px.eight]
+      [k.paddingTop, v.px.eight],
+      [k.cursor, p.clickable ? v.cursor.pointer : v.cursor.auto]
     ];
     switch (p.type) {
       default:
